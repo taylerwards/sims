@@ -3,7 +3,8 @@
 @section('content')
     <main class="auth-card">
         <p class="eyebrow">Welcome back</p>
-        <h1>Log in to SIMSwalter</h1>
+        <h1>Log in to SIMS
+        </h1>
         <p class="muted">Enter your account details to continue to the dashboard.</p>
 
         @if (session('status'))
