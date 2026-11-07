@@ -192,3 +192,25 @@ This file is the durable, human-readable context for Codex sessions in this repo
 
 - Added an active style and `aria-current="page"` to the navbar link matching the current route. Resource links stay active on their detail, create, and edit pages.
 - Validation: Blade compilation passed; no tests were run.
+
+### 2026-11-07 — Create project README
+
+- Replaced the Laravel starter README with SIMS documentation covering features, prerequisites, local setup, first Administrator provisioning, web workflows, and the authenticated student API.
+- Documented the current lack of an `.env.example` template and provided minimal local `.env` settings and SQLite setup commands.
+- Validation: reviewed README claims against the project plan and source files. No tests were run for this documentation-only change.
+
+### 2026-11-07 — Add environment example template
+
+- Added `.env.example` with local SIMS settings, SQLite as the default database, blank `APP_KEY`, and non-secret logging/mail defaults. The file is not covered by `.gitignore`, while local `.env` remains ignored.
+- Validation: confirmed `.env.example` exists and inspected the relevant ignore rules. No application tests were run.
+
+### 2026-11-07 — Refresh README for live deployment
+
+- Updated README with the live login URL, user-specified Hostinger hosting and GitHub CI/CD, and MySQL production database details. Expanded setup, deployment, and API instructions.
+- Changed `.env.example` local database defaults from SQLite to MySQL to match the project deployment configuration; database password remains blank and must be supplied locally.
+- Validation: reviewed README facts against project files and user-provided deployment details; no GitHub workflow files were present in this checkout. No tests were run for the documentation and configuration template update.
+
+### 2026-11-07 — Add GitHub repository link to README
+
+- Added the configured `taylerwards/sims` GitHub repository link to the README deployment information.
+- Validation: confirmed the URL in `.git/config` and checked the README entry. No tests were run.

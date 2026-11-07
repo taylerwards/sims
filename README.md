@@ -1,66 +1,142 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+﻿# Student Information Management System (SIMS)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+SIMS is a Laravel 12 application for managing college students, subjects, enrollments, user roles, and dashboard statistics. It also provides an authenticated JSON API for student records.
 
-## About Laravel
+## Live website and hosting
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Login:** [https://sims.wltech.dev/login](https://sims.wltech.dev/login)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Sample Accounts:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Admin Account:
+Email:admin@gmail.com
+Password:admin1234
+User Account:
+Email:user1@gmail.com
+Password:user1234
 
-## Learning Laravel
+use the same login credential in API login form.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **GitHub repository:** [taylerwards/sims](https://github.com/taylerwards/sims)
+- **Hosting provider:** Hostinger
+- **Source and deployment:** The project is connected to GitHub and uses a CI/CD deployment workflow for the hosted site.
+- **Production database:** MySQL
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+The live application requires an account to sign in. Public registration creates Staff accounts.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Features
 
-## Laravel Sponsors
+- Student records: create, view, update, and delete. Each student has a student number, name, email, course, and college year level (1–4).
+- Subject management: create, view, update, and delete subjects with a unique subject code, name, units, and optional description.
+- Enrollment management: create, view, update, and delete student-subject enrollments with enrollment date, status, and college year level.
+- Dashboard: student statistics by year level, enrollment statistics by status, an enrollment chart by calendar year and year level, and current system totals.
+- Authentication: registration, login, and logout. Staff and Administrators can manage student, subject, and enrollment records.
+- Administrator user management: view accounts, assign Staff or Administrator roles, update passwords, and delete accounts. Administrators cannot demote or delete themselves or remove the last Administrator.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Requirements
 
-### Premium Partners
+- PHP 8.2 or later with Laravel's required PHP extensions, including `pdo_mysql` for MySQL.
+- Composer.
+- MySQL for the production database. For local development, configure MySQL in `.env` as well.
+- Node.js and npm if you need to rebuild frontend assets.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Local setup
 
-## Contributing
+1. Install PHP dependencies and create a local environment file:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    ```sh
+    composer install
+    cp .env.example .env
+    ```
 
-## Code of Conduct
+    On Windows PowerShell, use `Copy-Item .env.example .env` instead of `cp` if needed.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2. Configure the local database in `.env`. Use the MySQL database name, username, and password from your local MySQL setup. Do not commit `.env` or share its credentials. The relevant settings are:
 
-## Security Vulnerabilities
+    ```dotenv
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=your_database_name
+    DB_USERNAME=your_mysql_username
+    DB_PASSWORD=your_mysql_password
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+3. Generate the app key and run migrations:
 
-## License
+    ```sh
+    php artisan key:generate
+    php artisan migrate
+    ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. If you need to rebuild frontend assets, install and build them:
+
+    ```sh
+    npm install
+    npm run build
+    ```
+
+5. Start Laravel's local development server:
+
+    ```sh
+    php artisan serve
+    ```
+
+    Open the local address printed by Artisan and register an account. New registrations receive the Staff role.
+
+### Provision the first Administrator
+
+After registering the account that should administer the system, run this command from the project directory:
+
+```sh
+php artisan user:make-administrator person@example.com
+```
+
+The command asks for confirmation and promotes an existing account; it does not create one.
+
+## Deployment
+
+The production website is hosted on Hostinger and connected to the GitHub repository through CI/CD. Configure the production environment in Hostinger with the MySQL connection details, application key, and other required Laravel environment settings. Keep database credentials and `APP_KEY` in the hosting environment; never put them in this repository. Serve the site over HTTPS, especially because the API uses HTTP Basic Authentication.
+
+## Student API
+
+The student API is available under `/api/students`. It uses HTTP Basic Authentication with an existing SIMS account's email address as the username and its password. Staff and Administrators can use the API. All API routes are limited to 60 requests per minute per client IP. Use HTTPS when sending credentials.
+
+| Method   | Endpoint             | Purpose                     |
+| -------- | -------------------- | --------------------------- |
+| `GET`    | `/api/students`      | List students (15 per page) |
+| `GET`    | `/api/students/{id}` | Read one student            |
+| `POST`   | `/api/students`      | Create a student            |
+| `PUT`    | `/api/students/{id}` | Update a student            |
+| `DELETE` | `/api/students/{id}` | Delete a student            |
+
+Example request. `curl` prompts for the password instead of including it in the command:
+
+```sh
+curl --user "person@example.com" \
+  -H "Accept: application/json" \
+  https://sims.wltech.dev/api/students
+```
+
+Create and update requests accept JSON with all of these required fields:
+
+```json
+{
+    "student_number": "S-1001",
+    "first_name": "Alex",
+    "last_name": "Rivera",
+    "email": "alex@example.com",
+    "course": "Information Technology",
+    "year_level": 1
+}
+```
+
+Email must be valid; student number and email must be unique; year level must be an integer from 1 through 4. Validation errors return `422` JSON. Successful creates return `201`, reads and updates return `200`, deletes return `204`, and unauthenticated requests return `401`. List responses include Laravel pagination metadata.
+
+## Tests
+
+Run the automated test suite with:
+
+```sh
+php artisan test
+```
